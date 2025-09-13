@@ -42,6 +42,8 @@ function playRound(humanChoice, compChoice) {
 }
 
 function playGame() {
+    humanScore=0;
+    computerScore=0;
     for (let i = 0; i < 5; i++) {
         alert("Round " + (i + 1));
         playRound(getHumanChoice(), getCompChoice());

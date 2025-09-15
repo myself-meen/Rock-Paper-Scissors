@@ -1,62 +1,85 @@
 console.log("Hello World");
 
-function getHumanChoice() {
-    let choice = prompt("Rock, paper or scissor?").toLowerCase();
-    return choice;
-}
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissor = document.querySelector("#scissor");
+const reset=document.querySelector("#reset");
+
+reset.addEventListener("click",()=>{
+    humanScore=0;
+    computerScore=0;
+    playerScoreSpan.textContent=humanScore;
+    computerScoreSpan.textContent=computerScore;
+    resultDiv.textContent="Game rest. Let's play again!";
+    enableButtons();
+})
+
+
+rock.addEventListener("click", () => {
+  playRound("rock", getCompChoice());
+});
+paper.addEventListener("click", () => {
+  playRound("paper", getCompChoice());
+});
+scissor.addEventListener("click", () => {
+  playRound("scissor", getCompChoice());
+});
+
+
+const playerScoreSpan = document.querySelector("#player-score");
+const computerScoreSpan = document.querySelector("#computer-score");
+const resultDiv = document.querySelector("#result");
 
 function getCompChoice() {
-    let a = Math.random();
-    if (a <= 0.33) {
-        return "rock";
-    } else if (a <= 0.66) {
-        return "paper";
-    } else {
-        return "scissor";
-    }
+  let a = Math.random();
+  if (a <= 0.33) {
+    return "rock";
+  } else if (a <= 0.66) {
+    return "paper";
+  } else {
+    return "scissor";
+  }
 }
 
 let humanScore = 0;
 let computerScore = 0;
 
 function playRound(humanChoice, compChoice) {
-    alert(`Computer chose: ${compChoice}`);
-    
-    if (humanChoice === compChoice) {
-        alert("It's a tie!");
-    }
-    else if (
-        (humanChoice === "rock" && compChoice === "scissor") ||
-        (humanChoice === "paper" && compChoice === "rock") ||
-        (humanChoice === "scissor" && compChoice === "paper")
-    ) {
-        humanScore++;
-        alert("You win this round!");
-    }
-    else {
-        computerScore++;
-        alert("Computer wins this round!");
-    }
-    
-    console.log(`Score -> You: ${humanScore}, Computer: ${computerScore}`);
-}
+  if (humanChoice === compChoice) {
+    resultDiv.textContent = `Both chose ${humanChoice}. It's a tie!`;
+  } else if (
+    (humanChoice === "rock" && compChoice === "scissor") ||
+    (humanChoice === "paper" && compChoice === "rock") ||
+    (humanChoice === "scissor" && compChoice === "paper")
+  ) {
+    humanScore++;
+    playerScoreSpan.textContent = humanScore;
+    resultDiv.textContent = `You win this round! ${humanChoice} beats ${compChoice}.`;
+  } else {
+    computerScore++;
+    computerScoreSpan.textContent = computerScore;
+    resultDiv.textContent = `Computer wins this round! ${compChoice} beats ${humanChoice}.`;
+  }
+  if (humanScore === 5) {
+    resultDiv.textContent = "🎉 You win the game!";
+    disableButtons();
+  } else if (computerScore === 5) {
+    resultDiv.textContent = "💻 Computer wins the game!";
+    disableButtons();
+  }
 
-function playGame() {
-    humanScore=0;
-    computerScore=0;
-    for (let i = 0; i < 5; i++) {
-        alert("Round " + (i + 1));
-        playRound(getHumanChoice(), getCompChoice());
-    }
-    
-    alert("Game Over!");
-    if (humanScore > computerScore) {
-        alert("🎉 You win the game!");
-    } else if (computerScore > humanScore) {
-    alert("💻 Computer wins the game!");
-    } else {
-        alert("🤝 It's a tie!");
-    }
+  
 }
+function enableButtons(){
+     rock.disabled = false;
+  paper.disabled = false;
+  scissor.disabled = false;
 
-playGame();
+}
+function disableButtons(){
+   rock.disabled=true;
+   paper.disabled=true;
+   scissor.disabled=true; 
+}
+// playGame() removed — game now runs only on button clicks
+

@@ -6,10 +6,6 @@ A classic Rock Paper Scissors game built with vanilla JavaScript as part of The 
 
 **[Play the Game Here](https://myself-meen.github.io/Rock-Paper-Scissors/)**
 
-## 📸 Screenshot
-
-![Rock Paper Scissors Game Interface](https://via.placeholder.com/800x400/1a1a1a/ffffff?text=Rock+Paper+Scissors+Game)
-
 ## ✨ Features
 
 - **Interactive Gameplay**: Choose between Rock, Paper, or Scissors with a simple button click
